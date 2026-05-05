@@ -1,0 +1,48 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile with optional contact details",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "mobile": { "type": "string" },
+        "createdAt": { "type": "number" },
+        "updatedAt": { "type": "number" }
+      },
+      "required": ["userId", "createdAt", "updatedAt"]
+    },
+    "ProductIdea": {
+      "title": "ProductIdea",
+      "description": "User's submitted product idea and its analysis",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "category": { "type": "string" },
+        "materials": { "type": "string" },
+        "productionLocation": { "type": "string" },
+        "targetMarket": { "type": "string" },
+        "intendedLifespan": { "type": "string" },
+        "distributionChannel": { "type": "string" },
+        "analysis": { "type": "object" },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["id", "userId", "name", "description", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "Stores user profile"
+    },
+    "/users/{userId}/ideas/{ideaId}": {
+      "schema": { "$ref": "#/entities/ProductIdea" },
+      "description": "Stores user's generated product ideas"
+    }
+  }
+}

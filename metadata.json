@@ -1,0 +1,6 @@
+{
+  "name": "EcoLens",
+  "description": "Deep, multi-framework sustainability analysis on product ideas. Evaluates footprint, UN SDGs, and 6Rs of circularity leveraging Gemini with Search grounding.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}

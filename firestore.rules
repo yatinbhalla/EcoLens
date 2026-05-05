@@ -1,0 +1,90 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Global Safety Net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Primitive definition
+    function isValidId(id) { 
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$'); 
+    }
+    function incoming() { return request.resource.data; }
+    function existing() { return resource.data; }
+    function isSignedIn() { return request.auth != null; }
+
+    // User Profile Validation
+    function isValidUser(data) {
+      return data.keys().hasAll(['userId', 'createdAt', 'updatedAt']) 
+        && data.userId is string && data.userId.size() <= 128
+        && data.userId == request.auth.uid
+        && data.createdAt is timestamp
+        && data.updatedAt is timestamp
+        && (data.get('name', '') is string && data.get('name', '').size() <= 200)
+        && (data.get('email', '') is string && data.get('email', '').size() <= 200)
+        && (data.get('mobile', '') is string && data.get('mobile', '').size() <= 50);
+    }
+
+    // ProductIdea Validation
+    function isValidIdea(data) {
+      return data.keys().hasAll(['id', 'userId', 'name', 'description', 'createdAt'])
+        && data.id is string && data.id.size() <= 128
+        && data.userId is string && data.userId.size() <= 128
+        && data.userId == request.auth.uid
+        && data.name is string && data.name.size() <= 200
+        && data.description is string && data.description.size() <= 5000
+        && data.createdAt is timestamp
+        && (data.get('category', '') is string && data.get('category', '').size() <= 200)
+        && (data.get('materials', '') is string && data.get('materials', '').size() <= 500)
+        && (data.get('productionLocation', '') is string && data.get('productionLocation', '').size() <= 200)
+        && (data.get('targetMarket', '') is string && data.get('targetMarket', '').size() <= 200)
+        && (data.get('intendedLifespan', '') is string && data.get('intendedLifespan', '').size() <= 100)
+        && (data.get('distributionChannel', '') is string && data.get('distributionChannel', '').size() <= 200)
+        && (data.get('analysis', {}) is map || data.get('analysis', '') is string); // Can be a map or a stringified JSON
+    }
+
+    match /users/{userId} {
+      allow get: if isSignedIn() && request.auth.uid == userId && isValidId(userId);
+      allow create: if isSignedIn() 
+        && request.auth.uid == userId 
+        && isValidId(userId)
+        && isValidUser(incoming())
+        && incoming().createdAt == request.time
+        && incoming().updatedAt == request.time;
+      allow update: if isSignedIn() 
+        && request.auth.uid == userId 
+        && isValidId(userId)
+        && isValidUser(incoming())
+        && incoming().userId == existing().userId
+        && incoming().createdAt == existing().createdAt
+        && incoming().updatedAt == request.time;
+      
+      match /ideas/{ideaId} {
+        allow get: if isSignedIn() && request.auth.uid == userId && isValidId(userId) && isValidId(ideaId);
+        allow list: if isSignedIn() && request.auth.uid == userId && isValidId(userId);
+        
+        allow delete: if isSignedIn() && request.auth.uid == userId && isValidId(userId) && isValidId(ideaId);
+        
+        allow create: if isSignedIn() 
+          && request.auth.uid == userId 
+          && isValidId(userId) 
+          && isValidId(ideaId)
+          && incoming().id == ideaId
+          && isValidIdea(incoming())
+          && incoming().createdAt == request.time;
+          
+        allow update: if isSignedIn() 
+          && request.auth.uid == userId 
+          && isValidId(userId) 
+          && isValidId(ideaId)
+          && isValidIdea(incoming())
+          && incoming().id == existing().id
+          && incoming().userId == existing().userId
+          && incoming().createdAt == existing().createdAt;
+      }
+    }
+  }
+}
