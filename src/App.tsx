@@ -8,7 +8,7 @@ import { HistoryDashboard } from "./components/HistoryDashboard";
 import { analyzeProductIdea } from "./lib/gemini";
 import { loadHistory, addOrUpdateIdea, deleteIdea } from "./lib/storage";
 import { exportToPDF } from "./lib/pdf";
-import { Download, ChevronLeft, History, BookOpen, CircleHelp } from "lucide-react";
+import { Download, ChevronLeft, History, BookOpen, CircleHelp, Linkedin } from "lucide-react";
 import { AuthProvider, useAuth } from './components/AuthProvider';
 import { LoginModal } from './components/LoginModal';
 import { Glossary } from './components/Glossary';
@@ -103,6 +103,15 @@ function AppContent() {
              <button onClick={() => setShowGlossary(true)} className="p-2 text-gray-500 dark:text-gray-400 hover:text-[#064E3B] dark:hover:text-emerald-400 rounded-full transition-colors" title="Glossary">
                <BookOpen className="w-5 h-5"/>
              </button>
+             <a 
+               href="https://www.linkedin.com/in/yatin-bhalla-834632238" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               className="p-2 text-[#0a66c2] dark:text-[#378fe9] hover:bg-[#0a66c2]/10 dark:hover:bg-[#378fe9]/10 hover:scale-125 rounded-full transition-all duration-300" 
+               title="Connect on LinkedIn"
+             >
+               <Linkedin className="w-5 h-5" strokeWidth={2.5}/>
+             </a>
 
              <div className="flex items-center gap-2 sm:gap-3 bg-[#F3F0E9] dark:bg-slate-800 p-1 rounded-full ml-1">
                {view === 'form' && (
