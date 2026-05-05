@@ -42,32 +42,32 @@ export function Onboarding({ onClose }: { onClose: () => void }) {
   const current = steps[step];
 
   return (
-    <div className="fixed inset-0 z-[60] bg-[#1A2E22]/50 backdrop-blur flex items-center justify-center p-4">
-      <div className="bg-[#FDFBF7] rounded-[2rem] p-8 max-w-lg w-full shadow-lg border border-[#E5E1D8] relative">
-        <button onClick={onClose} className="absolute top-6 right-6 text-gray-400 hover:text-[#064E3B]">
+    <div className="fixed inset-0 z-[60] bg-[#1A2E22]/50 dark:bg-slate-950/80 backdrop-blur flex items-center justify-center p-4">
+      <div className="bg-[#FDFBF7] dark:bg-slate-900 rounded-[2rem] p-8 max-w-lg w-full shadow-lg border border-[#E5E1D8] dark:border-slate-800 relative">
+        <button onClick={onClose} className="absolute top-6 right-6 text-gray-400 dark:text-slate-500 hover:text-[#064E3B] dark:hover:text-emerald-400 transition-colors">
            <X className="w-5 h-5"/>
         </button>
         
         <div className="flex justify-center mb-6">
-            <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-sm border border-[#E5E1D8]">
+            <div className="w-20 h-20 bg-white dark:bg-slate-950 rounded-full flex items-center justify-center shadow-sm border border-[#E5E1D8] dark:border-slate-800">
                 {current.icon}
             </div>
         </div>
 
         <div className="text-center mb-8 min-h-[140px]">
-            <h2 className="text-2xl font-bold text-[#064E3B] mb-3">{current.title}</h2>
-            <p className="text-[#1A2E22] leading-relaxed">{current.description}</p>
+            <h2 className="text-2xl font-bold text-[#064E3B] dark:text-emerald-400 mb-3">{current.title}</h2>
+            <p className="text-[#1A2E22] dark:text-slate-300 leading-relaxed">{current.description}</p>
         </div>
 
-        <div className="flex items-center justify-between mt-8 pt-6 border-t border-[#E5E1D8]">
+        <div className="flex items-center justify-between mt-8 pt-6 border-t border-[#E5E1D8] dark:border-slate-800">
             <div className="flex gap-2">
                 {steps.map((_, i) => (
-                    <div key={i} className={`h-2 rounded-full transition-all ${i === step ? 'w-6 bg-[#064E3B]' : 'w-2 bg-gray-300'}`} />
+                    <div key={i} className={`h-2 rounded-full transition-all ${i === step ? 'w-6 bg-[#064E3B] dark:bg-emerald-500' : 'w-2 bg-gray-300 dark:bg-slate-700'}`} />
                 ))}
             </div>
             <div className="flex gap-2">
-                {step > 0 && <button onClick={prevStep} className="px-4 py-2 font-bold text-gray-500 hover:text-[#1A2E22]">Back</button>}
-                <button onClick={nextStep} className="px-6 py-2 bg-[#064E3B] text-white rounded-full font-bold flex items-center gap-2 hover:bg-[#064E3B]/90">
+                {step > 0 && <button onClick={prevStep} className="px-4 py-2 font-bold text-gray-500 dark:text-slate-500 hover:text-[#1A2E22] dark:hover:text-slate-300 transition-colors">Back</button>}
+                <button onClick={nextStep} className="px-6 py-2 bg-[#064E3B] dark:bg-emerald-600 text-white rounded-full font-bold flex items-center gap-2 hover:bg-[#064E3B]/90 dark:hover:bg-emerald-500 transition-colors">
                     {step === steps.length - 1 ? 'Get Started' : 'Next'} {step < steps.length - 1 && <ArrowRight className="w-4 h-4"/>}
                 </button>
             </div>

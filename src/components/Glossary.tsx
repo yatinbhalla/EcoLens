@@ -18,20 +18,20 @@ const glossary: GlossaryTerm[] = [
 
 export function Glossary({ onClose }: { onClose: () => void }) {
   return (
-    <div className="fixed inset-0 z-50 bg-[#1A2E22]/50 backdrop-blur flex items-center justify-center p-4">
-      <div className="bg-[#FDFBF7] rounded-[2rem] p-8 max-w-2xl w-full shadow-lg border border-[#E5E1D8] max-h-[90vh] overflow-y-auto relative">
-        <button onClick={onClose} className="absolute top-6 right-6 text-gray-400 hover:text-[#064E3B]">
+    <div className="fixed inset-0 z-50 bg-[#1A2E22]/50 dark:bg-slate-950/80 backdrop-blur flex items-center justify-center p-4">
+      <div className="bg-[#FDFBF7] dark:bg-slate-900 rounded-[2rem] p-8 max-w-2xl w-full shadow-lg border border-[#E5E1D8] dark:border-slate-800 max-h-[90vh] overflow-y-auto relative">
+        <button onClick={onClose} className="absolute top-6 right-6 text-gray-400 dark:text-slate-500 hover:text-[#064E3B] dark:hover:text-emerald-400 transition-colors">
            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
         </button>
         <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-[#064E3B] mb-2 flex items-center justify-center gap-2"><Info className="w-8 h-8"/>EcoLens Glossary</h2>
-            <p className="text-gray-500">Understanding the language of sustainability. Use this reference to decode analysis scores and reports.</p>
+            <h2 className="text-3xl font-bold text-[#064E3B] dark:text-emerald-400 mb-2 flex items-center justify-center gap-2"><Info className="w-8 h-8"/>EcoLens Glossary</h2>
+            <p className="text-gray-500 dark:text-slate-400">Understanding the language of sustainability. Use this reference to decode analysis scores and reports.</p>
         </div>
         <div className="grid gap-4">
           {glossary.map((g, i) => (
-            <div key={i} className="bg-white p-6 rounded-2xl border border-[#E5E1D8] shadow-sm">
-                <h3 className="text-lg font-bold text-[#064E3B] mb-1">{g.term}</h3>
-                <p className="text-sm text-[#1A2E22]">{g.definition}</p>
+            <div key={i} className="bg-white dark:bg-slate-950 p-6 rounded-2xl border border-[#E5E1D8] dark:border-slate-800 shadow-sm">
+                <h3 className="text-lg font-bold text-[#064E3B] dark:text-emerald-400 mb-1">{g.term}</h3>
+                <p className="text-sm text-[#1A2E22] dark:text-slate-300">{g.definition}</p>
             </div>
           ))}
         </div>

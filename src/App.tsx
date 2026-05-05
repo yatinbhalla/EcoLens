@@ -13,6 +13,7 @@ import { AuthProvider, useAuth } from './components/AuthProvider';
 import { LoginModal } from './components/LoginModal';
 import { Glossary } from './components/Glossary';
 import { Onboarding } from './components/Onboarding';
+import { ThemeToggle } from './components/ThemeToggle';
 
 function AppContent() {
   const [ideas, setIdeas] = useState<ProductIdea[]>([]);
@@ -85,36 +86,37 @@ function AppContent() {
   }
 
   return (
-    <div className="min-h-screen bg-[#FDFBF7] text-[#1A2E22] font-sans selection:bg-[#6B8E23]/30">
-      <header className="sticky top-0 z-40 w-full flex-none bg-[#FDFBF7]/90 backdrop-blur pb-4 pt-6">
+    <div className="min-h-screen bg-[#FDFBF7] dark:bg-slate-950 text-[#1A2E22] dark:text-slate-100 font-sans selection:bg-[#6B8E23]/30 dark:selection:bg-emerald-500/30">
+      <header className="sticky top-0 z-40 w-full flex-none bg-[#FDFBF7]/90 dark:bg-slate-950/90 backdrop-blur pb-4 pt-6">
         <div className="max-w-[1024px] mx-auto px-6 h-12 flex items-center justify-between">
           <div className="flex items-center gap-3 cursor-pointer" onClick={() => setView('form')}>
-            <div className="w-10 h-10 bg-[#064E3B] rounded-xl flex items-center justify-center text-white font-bold text-xl">🌱</div>
-            <h1 className="text-2xl font-bold tracking-tight text-[#064E3B] hidden sm:block">EcoLens <span className="text-[#6B8E23] font-normal">Sustainability Analyzer</span></h1>
-            <h1 className="text-xl font-bold tracking-tight text-[#064E3B] sm:hidden">EcoLens</h1>
+            <div className="w-10 h-10 bg-[#064E3B] dark:bg-emerald-600 rounded-xl flex items-center justify-center text-white font-bold text-xl">🌱</div>
+            <h1 className="text-2xl font-bold tracking-tight text-[#064E3B] dark:text-emerald-400 hidden sm:block">EcoLens <span className="text-[#6B8E23] dark:text-emerald-500 font-normal">Sustainability Analyzer</span></h1>
+            <h1 className="text-xl font-bold tracking-tight text-[#064E3B] dark:text-emerald-400 sm:hidden">EcoLens</h1>
           </div>
 
-          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-             <button onClick={() => setShowOnboarding(true)} className="p-2 text-gray-500 hover:text-[#064E3B] rounded-full transition-colors" title="Tour">
+          <div className="flex flex-wrap items-center gap-1 sm:gap-3">
+             <ThemeToggle />
+             <button onClick={() => setShowOnboarding(true)} className="p-2 text-gray-500 dark:text-gray-400 hover:text-[#064E3B] dark:hover:text-emerald-400 rounded-full transition-colors" title="Tour">
                <CircleHelp className="w-5 h-5"/>
              </button>
-             <button onClick={() => setShowGlossary(true)} className="p-2 text-gray-500 hover:text-[#064E3B] rounded-full transition-colors" title="Glossary">
+             <button onClick={() => setShowGlossary(true)} className="p-2 text-gray-500 dark:text-gray-400 hover:text-[#064E3B] dark:hover:text-emerald-400 rounded-full transition-colors" title="Glossary">
                <BookOpen className="w-5 h-5"/>
              </button>
 
-             <div className="flex items-center gap-2 sm:gap-3 bg-[#F3F0E9] p-1 rounded-full">
+             <div className="flex items-center gap-2 sm:gap-3 bg-[#F3F0E9] dark:bg-slate-800 p-1 rounded-full ml-1">
                {view === 'form' && (
-                   <button className="px-4 sm:px-6 py-2 bg-white rounded-full text-sm font-semibold shadow-sm text-[#064E3B]" onClick={openHistory}>
+                   <button className="px-4 sm:px-6 py-2 bg-white dark:bg-slate-700 rounded-full text-sm font-semibold shadow-sm text-[#064E3B] dark:text-emerald-100" onClick={openHistory}>
                      History
                    </button>
                )}
                {view !== 'form' && !isAnalyzing && (
                  <>
-                   <button onClick={() => setView('form')} className="hidden sm:inline-block px-4 sm:px-6 py-2 text-sm font-medium text-gray-500 hover:text-[#1A2E22] transition-colors rounded-full">
+                   <button onClick={() => setView('form')} className="hidden sm:inline-block px-4 sm:px-6 py-2 text-sm font-medium text-gray-500 dark:text-gray-300 hover:text-[#1A2E22] dark:hover:text-white transition-colors rounded-full">
                      Compare Ideas
                    </button>
                    {(view === 'analysis' || view === 'comparison') && (
-                       <button onClick={handleExport} className="px-4 sm:px-6 py-2 bg-white rounded-full text-sm font-semibold shadow-sm text-[#064E3B] hover:bg-gray-50 flex items-center gap-2">
+                       <button onClick={handleExport} className="px-4 sm:px-6 py-2 bg-white dark:bg-slate-700 rounded-full text-sm font-semibold shadow-sm text-[#064E3B] dark:text-emerald-100 hover:bg-gray-50 dark:hover:bg-slate-600 flex items-center gap-2">
                          <Download className="w-4 h-4" /> <span className="hidden sm:inline">Export PDF</span>
                        </button>
                    )}
@@ -124,19 +126,19 @@ function AppContent() {
 
              {user ? (
                <div className="relative group ml-2">
-                 <button className="w-10 h-10 rounded-full bg-[#064E3B] text-white font-bold flex items-center justify-center overflow-hidden border-2 border-white shadow-sm">
+                 <button className="w-10 h-10 rounded-full bg-[#064E3B] dark:bg-emerald-600 text-white font-bold flex items-center justify-center overflow-hidden border-2 border-white dark:border-slate-800 shadow-sm">
                     {user.photoURL ? <img src={user.photoURL} alt={user.displayName || ''} /> : (user.displayName || 'U').charAt(0).toUpperCase()}
                  </button>
-                 <div className="absolute right-0 mt-2 w-48 bg-white border border-[#E5E1D8] shadow-lg rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
-                    <div className="p-3 border-b border-[#E5E1D8]">
-                        <p className="text-sm font-bold text-[#1A2E22] truncate">{user.displayName}</p>
-                        <p className="text-xs text-gray-500 truncate">{user.email}</p>
+                 <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-slate-800 border border-[#E5E1D8] dark:border-slate-700 shadow-lg rounded-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+                    <div className="p-3 border-b border-[#E5E1D8] dark:border-slate-700">
+                        <p className="text-sm font-bold text-[#1A2E22] dark:text-slate-100 truncate">{user.displayName}</p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400 truncate">{user.email}</p>
                     </div>
-                    <button onClick={logOut} className="w-full text-left p-3 text-sm text-rose-600 hover:bg-rose-50 font-bold rounded-b-xl">Sign Out</button>
+                    <button onClick={logOut} className="w-full text-left p-3 text-sm text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/30 font-bold rounded-b-xl">Sign Out</button>
                  </div>
                </div>
              ) : (
-               <button onClick={() => setShowLogin(true)} className="ml-2 px-4 py-2 bg-[#064E3B] text-white rounded-full text-sm font-bold shadow-sm hover:bg-[#064E3B]/90 transition-colors">
+               <button onClick={() => setShowLogin(true)} className="ml-2 px-4 py-2 bg-[#064E3B] dark:bg-emerald-600 text-white rounded-full text-sm font-bold shadow-sm hover:bg-[#064E3B]/90 dark:hover:bg-emerald-500 transition-colors">
                   Sign In
                </button>
              )}

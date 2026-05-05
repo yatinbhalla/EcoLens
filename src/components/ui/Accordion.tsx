@@ -13,7 +13,7 @@ export function Accordion({ title, children, defaultOpen = false, className }: A
   const [isOpen, setIsOpen] = useState(defaultOpen);
 
   return (
-    <div className={cn("border-b border-[#E5E1D8] last:border-0", className)}>
+    <div className={cn("border-b border-[#E5E1D8] dark:border-slate-800 last:border-0", className)}>
       <button
         type="button"
         className="flex w-full items-center justify-between py-4 text-sm font-medium transition-all hover:underline"

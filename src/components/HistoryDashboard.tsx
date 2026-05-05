@@ -34,22 +34,22 @@ export function HistoryDashboard({ history, onSelect, onCompareSelected, onDelet
 
   if (history.length === 0) {
     return (
-      <div className="text-center py-20 text-[#1A2E22]">
-        <h2 className="text-2xl font-bold text-gray-400">No History Yet</h2>
-        <p className="text-gray-500 mt-2">Analyze some ideas to see them here.</p>
+      <div className="text-center py-20 text-[#1A2E22] dark:text-slate-100">
+        <h2 className="text-2xl font-bold text-gray-400 dark:text-slate-500">No History Yet</h2>
+        <p className="text-gray-500 dark:text-slate-400 mt-2">Analyze some ideas to see them here.</p>
       </div>
     );
   }
 
   return (
-    <div className="w-full max-w-[1024px] mx-auto space-y-8 text-[#1A2E22] pb-12">
+    <div className="w-full max-w-[1024px] mx-auto space-y-8 text-[#1A2E22] dark:text-slate-100 pb-12">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
         <div>
-          <h2 className="text-3xl font-bold mb-2 text-[#064E3B]">Analysis History</h2>
-          <p className="text-gray-500">Select up to 5 ideas to compare laterally.</p>
+          <h2 className="text-3xl font-bold mb-2 text-[#064E3B] dark:text-emerald-400">Analysis History</h2>
+          <p className="text-gray-500 dark:text-slate-400">Select up to 5 ideas to compare laterally.</p>
         </div>
         {selectedIds.size > 1 && (
-          <button onClick={handleCompare} className="px-6 py-2 bg-[#064E3B] text-white rounded-full font-bold shadow-sm hover:bg-[#064E3B]/90 transition-all">
+          <button onClick={handleCompare} className="px-6 py-2 bg-[#064E3B] dark:bg-emerald-600 text-white rounded-full font-bold shadow-sm hover:bg-[#064E3B]/90 dark:hover:bg-emerald-500 transition-all">
             Compare {selectedIds.size} Selected
           </button>
         )}
@@ -62,32 +62,32 @@ export function HistoryDashboard({ history, onSelect, onCompareSelected, onDelet
           return (
             <div 
               key={idea.id} 
-              className={`relative p-8 rounded-[2rem] border transition-all cursor-pointer shadow-sm ${isSelected ? 'border-[#064E3B] bg-[#E7F3EF]' : 'border-[#E5E1D8] bg-white hover:border-[#6B8E23]'}`}
+              className={`relative p-8 rounded-[2rem] border transition-all cursor-pointer shadow-sm ${isSelected ? 'border-[#064E3B] dark:border-emerald-500 bg-[#E7F3EF] dark:bg-emerald-950/20' : 'border-[#E5E1D8] dark:border-slate-800 bg-white dark:bg-slate-900 hover:border-[#6B8E23] dark:hover:border-emerald-500'}`}
               onClick={() => toggleSelect(idea.id)}
             >
               <div className="flex justify-between items-start mb-4">
                 <div className="flex-1">
-                  <h3 className="font-bold text-xl text-[#064E3B]">{idea.name}</h3>
-                  <p className="text-xs text-gray-500">{date}</p>
+                  <h3 className="font-bold text-xl text-[#064E3B] dark:text-emerald-400">{idea.name}</h3>
+                  <p className="text-xs text-gray-500 dark:text-slate-500">{date}</p>
                 </div>
                 {idea.analysis && (
-                   <div className={`text-2xl font-black ${isSelected ? 'text-[#064E3B]' : 'text-[#6B8E23]'}`}>
+                   <div className={`text-2xl font-black ${isSelected ? 'text-[#064E3B] dark:text-emerald-400' : 'text-[#6B8E23] dark:text-emerald-500'}`}>
                      {idea.analysis.overallScore}
                    </div>
                 )}
               </div>
-              <p className="text-sm text-gray-500 line-clamp-2 mb-6">
+              <p className="text-sm text-gray-500 dark:text-slate-400 line-clamp-2 mb-6">
                 {idea.description}
               </p>
               <div className="flex justify-between items-center mt-auto">
                 <button 
-                  className="px-4 py-2 bg-white border border-[#E5E1D8] rounded-lg font-bold text-[#1A2E22] hover:bg-gray-50" 
+                  className="px-4 py-2 bg-white dark:bg-slate-800 border border-[#E5E1D8] dark:border-slate-700 rounded-lg font-bold text-[#1A2E22] dark:text-slate-100 hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors" 
                   onClick={(e) => { e.stopPropagation(); onSelect(idea); }}
                 >
                   View Full
                 </button>
                 <button 
-                  className="text-gray-400 hover:text-rose-500 p-2"
+                  className="text-gray-400 dark:text-slate-500 hover:text-rose-500 dark:hover:text-rose-400 p-2 transition-colors"
                   onClick={(e) => { e.stopPropagation(); onDelete(idea.id); }}
                   title="Delete"
                 >

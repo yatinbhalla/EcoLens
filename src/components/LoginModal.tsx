@@ -25,16 +25,16 @@ export function LoginModal({ onClose }: { onClose: () => void }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-[#1A2E22]/50 backdrop-blur flex items-center justify-center p-4">
-      <div className="bg-[#FDFBF7] rounded-[2rem] p-8 max-w-sm w-full shadow-lg border border-[#E5E1D8]">
+    <div className="fixed inset-0 z-50 bg-[#1A2E22]/50 dark:bg-slate-950/80 backdrop-blur flex items-center justify-center p-4">
+      <div className="bg-[#FDFBF7] dark:bg-slate-900 rounded-[2rem] p-8 max-w-sm w-full shadow-lg border border-[#E5E1D8] dark:border-slate-800">
         {step === 1 && (
           <div className="text-center space-y-6">
-            <div className="w-16 h-16 bg-[#064E3B] rounded-2xl flex items-center justify-center text-white text-3xl mx-auto">🌱</div>
+            <div className="w-16 h-16 bg-[#064E3B] dark:bg-emerald-800 rounded-2xl flex items-center justify-center text-white text-3xl mx-auto">🌱</div>
             <div>
-              <h2 className="text-2xl font-bold text-[#064E3B]">Welcome</h2>
-              <p className="text-sm text-gray-500 mt-2">Sign in to save your sustainability analysis history and access it across devices.</p>
+              <h2 className="text-2xl font-bold text-[#064E3B] dark:text-emerald-400">Welcome</h2>
+              <p className="text-sm text-gray-500 dark:text-slate-400 mt-2">Sign in to save your sustainability analysis history and access it across devices.</p>
             </div>
-            <button onClick={handleSignIn} className="w-full py-3 px-4 bg-white border border-[#E5E1D8] text-[#1A2E22] rounded-xl font-bold hover:bg-gray-50 flex justify-center items-center gap-2">
+            <button onClick={handleSignIn} className="w-full py-3 px-4 bg-white dark:bg-slate-950 border border-[#E5E1D8] dark:border-slate-700 text-[#1A2E22] dark:text-slate-100 rounded-xl font-bold hover:bg-gray-50 dark:hover:bg-slate-800 flex justify-center items-center gap-2 transition-colors">
                <svg className="w-5 h-5" viewBox="0 0 24 24">
                   <path
                     d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -55,7 +55,7 @@ export function LoginModal({ onClose }: { onClose: () => void }) {
                 </svg>
                 Continue with Google
             </button>
-            <button onClick={onClose} className="text-xs font-bold text-gray-500 uppercase tracking-wider hover:text-[#064E3B] transition-colors">
+            <button onClick={onClose} className="text-xs font-bold text-gray-500 dark:text-slate-400 uppercase tracking-wider hover:text-[#064E3B] dark:hover:text-emerald-400 transition-colors">
               Continue without signing in
             </button>
           </div>
@@ -64,21 +64,21 @@ export function LoginModal({ onClose }: { onClose: () => void }) {
         {step === 2 && (
           <div className="text-center space-y-6">
             <div>
-              <h2 className="text-2xl font-bold text-[#064E3B]">Save Contact Details</h2>
-              <p className="text-sm text-gray-500 mt-2">Optionally add a mobile number for future updates.</p>
+              <h2 className="text-2xl font-bold text-[#064E3B] dark:text-emerald-400">Save Contact Details</h2>
+              <p className="text-sm text-gray-500 dark:text-slate-400 mt-2">Optionally add a mobile number for future updates.</p>
             </div>
             
             <div className="space-y-4 text-left">
                <div>
-                 <label className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-1 block">Full Name (from Google)</label>
-                 <Input value={user?.displayName || ''} disabled className="bg-gray-50" />
+                 <label className="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-slate-400 mb-1 block">Full Name (from Google)</label>
+                 <Input value={user?.displayName || ''} disabled className="bg-gray-50 dark:bg-slate-800/50" />
                </div>
                <div>
-                 <label className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-1 block">Email (from Google)</label>
-                 <Input value={user?.email || ''} disabled className="bg-gray-50" />
+                 <label className="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-slate-400 mb-1 block">Email (from Google)</label>
+                 <Input value={user?.email || ''} disabled className="bg-gray-50 dark:bg-slate-800/50" />
                </div>
                <div>
-                 <label className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-1 block">Mobile Number (Optional)</label>
+                 <label className="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-slate-400 mb-1 block">Mobile Number (Optional)</label>
                  <Input 
                    placeholder="+1 234 567 8900" 
                    value={mobile} 
@@ -88,10 +88,10 @@ export function LoginModal({ onClose }: { onClose: () => void }) {
             </div>
 
             <div className="flex gap-3">
-              <button onClick={() => onClose()} className="flex-1 py-3 px-4 bg-white border border-[#E5E1D8] text-[#1A2E22] rounded-xl font-bold hover:bg-gray-50 flex justify-center items-center">
+              <button onClick={() => onClose()} className="flex-1 py-3 px-4 bg-white dark:bg-slate-800 border border-[#E5E1D8] dark:border-slate-700 text-[#1A2E22] dark:text-slate-100 rounded-xl font-bold hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors flex justify-center items-center">
                 Skip
               </button>
-              <button onClick={handleSaveContact} className="flex-1 py-3 px-4 bg-[#064E3B] text-white rounded-xl font-bold hover:bg-[#064E3B]/90 flex justify-center items-center">
+              <button onClick={handleSaveContact} className="flex-1 py-3 px-4 bg-[#064E3B] dark:bg-emerald-600 text-white rounded-xl font-bold hover:bg-[#064E3B]/90 dark:hover:bg-emerald-500 transition-colors flex justify-center items-center">
                 Save & Continue
               </button>
             </div>
